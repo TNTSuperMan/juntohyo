@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig-base.json",
   "compilerOptions": {
-    "lib": ["ESNext", "WebWorker"],
-    "typeRoots": ["./node_modules"]
+    "types": ["./worker-configuration.d.ts"],
+    "lib": ["ESNext", "WebWorker"]
   }
 }
