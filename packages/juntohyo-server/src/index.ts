@@ -1,7 +1,7 @@
-import { Hono } from "hono";
-import type { Bindings, Env } from "./types";
+import { app } from "./app";
+import type { Bindings } from "./types";
 
-const app = new Hono<Env>();
+import "./routes";
 
 app.get("/hello", (c) => c.text("Hey! It's Juntohyo's server!"));
 
