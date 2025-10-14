@@ -1,11 +1,11 @@
 import { Hono } from "hono";
-import type { Env } from "./env";
+import type { Bindings, Env } from "./types";
 
-const app = new Hono<{ Bindings: Env }>();
+const app = new Hono<Env>();
 
 app.get("/hello", (c) => c.text("Hey! It's Juntohyo's server!"));
 
-const handler: ExportedHandler<Env> = {
+const handler: ExportedHandler<Bindings> = {
     fetch: app.fetch,
 };
 
