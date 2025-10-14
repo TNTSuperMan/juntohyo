@@ -1,0 +1,10 @@
+name = "juntohyo-server"
+main = "src/index.ts"
+compatibility_date = "2025-10-14"
+preview_urls = false
+
+[build]
+command = "bun run build"
+
+[dev]
+port = 8787
