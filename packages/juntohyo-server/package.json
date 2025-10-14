@@ -10,6 +10,7 @@
     "wrangler": "^4.42.2"
   },
   "scripts": {
-    "postinstall": "wrangler types"
+    "postinstall": "wrangler types",
+    "build": "bun build --outdir=dist --target=browser --production ./src/index.ts"
   }
 }

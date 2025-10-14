@@ -1,10 +1,10 @@
 name = "juntohyo-server"
-main = "dist/index.js"
+main = "dist/index.ts"
 compatibility_date = "2025-10-14"
 preview_urls = false
 
 [build]
-command = "bun build --outdir=dist --target=browser --minify ./src/index.ts"
+command = "bun run build"
 
 [dev]
 port = 8787
