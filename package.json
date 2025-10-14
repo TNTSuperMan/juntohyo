@@ -1,6 +1,5 @@
 {
-  "name": "juntohyo",
-  "module": "index.ts",
+  "name": "juntohyo-monorepo",
   "type": "module",
   "private": true,
   "devDependencies": {
@@ -8,5 +7,8 @@
   },
   "peerDependencies": {
     "typescript": "^5"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

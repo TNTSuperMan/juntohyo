@@ -1,0 +1,8 @@
+{
+  "name": "juntohyo-server",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "hono": "^4.9.12"
+  }
+}
