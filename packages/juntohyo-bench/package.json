@@ -1,0 +1,8 @@
+{
+  "name": "juntohyo-bench",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "mitata": "^1.0.34"
+  }
+}
