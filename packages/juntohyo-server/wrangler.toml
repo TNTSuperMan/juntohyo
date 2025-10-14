@@ -1,5 +1,5 @@
 name = "juntohyo-server"
-main = "src/index.ts"
+main = "dist/index.ts"
 compatibility_date = "2025-10-14"
 preview_urls = false
 
