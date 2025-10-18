@@ -4,6 +4,7 @@ export interface Bindings {
     VOTES_DB: D1Database;
     ELECTIONS_KV: KVNamespace;
     HASH_KEY: string;
+    TURNSTILE_SECRET: string;
 }
 
 export interface Env extends HonoEnv {
