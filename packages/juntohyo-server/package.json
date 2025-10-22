@@ -3,15 +3,20 @@
   "type": "module",
   "private": true,
   "dependencies": {
+    "@hono/typia-validator": "^0.1.2",
     "hono": "^4.9.12",
-    "zod": "^4.1.12"
+    "typia": "^8"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20251011.0",
+    "@ryoppippi/unplugin-typia": "^2.6.5",
+    "ts-patch": "^3.3.0",
+    "typescript": "~5.8.2",
     "wrangler": "^4.42.2"
   },
   "scripts": {
     "postinstall": "wrangler types",
-    "build": "bun build --outdir=dist --target=browser --production ./src/index.ts"
+    "build": "bun build.ts",
+    "prepare": "ts-patch install"
   }
 }

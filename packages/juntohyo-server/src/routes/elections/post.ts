@@ -1,12 +1,34 @@
-import z from "zod";
+import typia from "typia";
 import { app } from "../../app";
+import { typiaValidator } from "@hono/typia-validator";
 
-const postElectionsBodySchema = z.object({
-    title: z.string().max(128),
-    description: z.string().max(1024),
-    options: z.array(z.string().max(128)).max(16),
-});
+interface Option {
+    /**
+     * @maxLength 128
+     */
+    name: string;
+}
 
-app.post("/elections", (c) => {
-    return c.text("501 Not Implemented", 501);
-});
+interface PostElectionsBody {
+    /**
+     * @maxLength 128
+     */
+    title: string;
+    /**
+     * @maxLength 1024
+     */
+    description: string;
+    /**
+     * @maxItems 16
+     */
+    options: Option[];
+}
+
+const postElectionsBodyValidator = typia.createValidate<PostElectionsBody>();
+
+app.post("/elections",
+    typiaValidator("json", postElectionsBodyValidator),
+        (c) => {
+        return c.text("501 Not Implemented", 501);
+    }
+);
