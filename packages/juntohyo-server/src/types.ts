@@ -10,3 +10,14 @@ export interface Bindings {
 export interface Env extends HonoEnv {
     Bindings: Bindings;
 }
+
+export interface Option {
+    name: string;
+}
+
+export interface Election {
+    uuid: string;
+    title: string;
+    description: string;
+    options: Option[];
+}
