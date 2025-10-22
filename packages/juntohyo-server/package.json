@@ -15,8 +15,7 @@
     "wrangler": "^4.42.2"
   },
   "scripts": {
-    "postinstall": "wrangler types",
     "build": "bun build.ts",
-    "prepare": "ts-patch install"
+    "prepare": "wrangler types && ts-patch install"
   }
 }

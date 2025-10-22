@@ -6,7 +6,7 @@ await build({
     plugins: [UnpluginTypia()],
     outdir: "./dist",
     target: "browser",
-    //minify: true,
+    minify: true,
     define: {
         "process.env.NODE_ENV": `"production"`
     },
