@@ -28,7 +28,7 @@ const postElectionsBodyValidator = typia.createValidate<PostElectionsBody>();
 
 app.post("/elections",
     typiaValidator("json", postElectionsBodyValidator),
-        (c) => {
+    (c) => {
         return c.text("501 Not Implemented", 501);
     }
 );
