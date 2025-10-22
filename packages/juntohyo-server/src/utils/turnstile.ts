@@ -28,7 +28,7 @@ interface TurnstileFailedResponse {
     )[]
 }
 
-export const checkTurnstile = async (c: Context<Env>, token: string | null | undefined): Promise<TurnstileSuccessResponse> => {
+export const verifyTurnstile = async (c: Context<Env>, token: string | null | undefined): Promise<TurnstileSuccessResponse> => {
     if (!token) {
         throw new ClientError(ErrorCodes.BadRequest);
     }
