@@ -8,3 +8,12 @@ command = "bun run build"
 
 [dev]
 port = 8787
+
+[[d1_databases]]
+binding = "VOTES_DB"
+database_name = "juntohyo-db"
+database_id = "id"
+
+[[kv_namespaces]]
+binding = "ELECTIONS_KV"
+id = "id"
