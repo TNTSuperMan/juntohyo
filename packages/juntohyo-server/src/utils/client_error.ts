@@ -5,6 +5,7 @@ export const enum ErrorCodes {
     ServerError = "SERVER_ERROR",
     InvalidTurnstile = "INVALID_TURNSTILE",
     ConflictUUID = "CONFLICT_UUID",
+    TooManyRequest = "TOO_MANY_REQUEST",
 }
 
 const ErrorCodeToStatus = (code: ErrorCodes): ClientErrorStatusCode | 500 => {
@@ -13,6 +14,7 @@ const ErrorCodeToStatus = (code: ErrorCodes): ClientErrorStatusCode | 500 => {
         case ErrorCodes.ServerError:return 500;
         case ErrorCodes.InvalidTurnstile: return 400;
         case ErrorCodes.ConflictUUID: return 500;
+        case ErrorCodes.TooManyRequest: return 429;
     }
 }
 

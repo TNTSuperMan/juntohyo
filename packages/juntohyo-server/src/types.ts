@@ -5,6 +5,8 @@ export interface Bindings {
     ELECTIONS_KV: KVNamespace;
     HASH_KEY: string;
     TURNSTILE_SECRET: string;
+    GET_RATE_LIMITER: RateLimit;
+    POSTY_RATE_LIMITER: RateLimit;
 }
 
 export interface Env extends HonoEnv {

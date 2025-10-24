@@ -1,8 +1,11 @@
 import { Hono } from "hono";
 import type { Env } from "./types";
 import { ClientError, ErrorCodes } from "./utils/client_error";
+import { rateLimit } from "./middlewares/rate-limit";
 
 export const app = new Hono<Env>();
+
+app.use(rateLimit());
 
 app.onError((err, c) => {
     if (err instanceof ClientError) {
