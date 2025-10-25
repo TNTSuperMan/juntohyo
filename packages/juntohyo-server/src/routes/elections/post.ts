@@ -39,7 +39,7 @@ app.post("/elections",
         
         await verifyTurnstile(c, body["cf-turnstile-response"]);
 
-        let uuid = crypto.randomUUID();
+        const uuid = crypto.randomUUID();
         if (await c.env.ELECTIONS_KV.get(uuid)) {
             console.log(`**お知らせ** UUIDが衝突しました!!!! ${uuid}`);
             throw new ClientError(ErrorCodes.ConflictUUID);
