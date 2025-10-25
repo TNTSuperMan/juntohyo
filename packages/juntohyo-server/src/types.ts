@@ -1,4 +1,5 @@
 import type { Env as HonoEnv } from "hono";
+import type { AuthDurableObject } from "./durable-objects/auth";
 
 export interface Bindings {
     VOTES_DB: D1Database;
@@ -7,6 +8,7 @@ export interface Bindings {
     TURNSTILE_SECRET: string;
     GET_RATE_LIMITER: RateLimit;
     POSTY_RATE_LIMITER: RateLimit;
+    AUTH_DO: DurableObjectNamespace<AuthDurableObject>;
 }
 
 export interface Env extends HonoEnv {

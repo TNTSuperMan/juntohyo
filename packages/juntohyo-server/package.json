@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@hono/typia-validator": "^0.1.2",
+    "bcryptjs": "^3.0.2",
     "hono": "^4.9.12",
     "typia": "^8"
   },
