@@ -7,6 +7,7 @@ await build({
     outdir: "./dist",
     target: "browser",
     minify: true,
+    external: ["cloudflare:workers"],
     define: {
         "process.env.NODE_ENV": `"production"`
     },
