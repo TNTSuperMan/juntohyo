@@ -52,7 +52,6 @@ app.post("/elections",
         }
 
         const election: Election = {
-            uuid,
             title: body.title,
             description: body.description,
             options: body.options,

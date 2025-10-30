@@ -20,7 +20,6 @@ export interface Option {
 }
 
 export interface Election {
-    uuid: string;
     title: string;
     description: string;
     options: Option[];
