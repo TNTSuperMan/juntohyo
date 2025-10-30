@@ -60,6 +60,6 @@ app.post("/elections",
 
         await c.env.ELECTIONS_KV.put(uuid, JSON.stringify(election));
         
-        return c.json({ success: true }, 201);
+        return c.json({ success: true, uuid }, 201);
     }
 );
