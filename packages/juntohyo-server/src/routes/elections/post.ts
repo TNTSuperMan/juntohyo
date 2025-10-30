@@ -5,6 +5,7 @@ import { handleValidation } from "../../utils/handle_validation";
 import { verifyTurnstile } from "../../utils/turnstile";
 import { ClientError, ErrorCodes } from "../../utils/client_error";
 import type { Election } from "../../types";
+import { hash } from "../../utils/password";
 
 interface Option {
     /**
@@ -26,6 +27,11 @@ interface PostElectionsBody {
      * @maxItems 16
      */
     options: Option[];
+
+    /**
+     * @maxLength 128
+     */
+    password: string | null;
 
     "cf-turnstile-response": string;
 }
@@ -50,6 +56,7 @@ app.post("/elections",
             title: body.title,
             description: body.description,
             options: body.options,
+            password: body.password ? await hash(c, body.password) : null,
         }
 
         await c.env.ELECTIONS_KV.put(uuid, JSON.stringify(election));

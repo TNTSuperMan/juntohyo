@@ -24,4 +24,5 @@ export interface Election {
     title: string;
     description: string;
     options: Option[];
+    password: string | null;
 }
