@@ -45,10 +45,10 @@ app.post("/elections",
         
         await verifyTurnstile(c, body["cf-turnstile-response"]);
 
-        const uuid = crypto.randomUUID();
-        if (await c.env.ELECTIONS_KV.get(uuid)) {
-            console.log(`**お知らせ** UUIDが衝突しました!!!! ${uuid}`);
-            throw new ClientError(ErrorCodes.ConflictUUID);
+        const id = crypto.getRandomValues(Buffer.alloc(16)).toString("base64url");
+        if (await c.env.ELECTIONS_KV.get(id)) {
+            console.log(`**お知らせ** IDが衝突しました!!!! ${id}`);
+            throw new ClientError(ErrorCodes.ConflictID);
         }
 
         const election: Election = {
@@ -58,8 +58,8 @@ app.post("/elections",
             password: body.password ? await hash(c, body.password) : null,
         }
 
-        await c.env.ELECTIONS_KV.put(uuid, JSON.stringify(election));
+        await c.env.ELECTIONS_KV.put(id, JSON.stringify(election));
         
-        return c.json({ success: true, uuid }, 201);
+        return c.json({ success: true, id: id }, 201);
     }
 );
