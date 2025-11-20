@@ -1,11 +1,11 @@
 import typia from "typia";
-import { app } from "../../app";
+import { app } from "../app";
 import { typiaValidator } from "@hono/typia-validator";
-import { handleValidation } from "../../utils/handle_validation";
-import { verifyTurnstile } from "../../utils/turnstile";
-import { ClientError, ErrorCodes } from "../../utils/client_error";
-import type { Election } from "../../types";
-import { hash } from "../../utils/password";
+import { handleValidation } from "../utils/handle_validation";
+import { verifyTurnstile } from "../utils/turnstile";
+import { ClientError, ErrorCodes } from "../utils/client_error";
+import type { Election } from "../types";
+import { hash } from "../utils/password";
 
 interface Option {
     /**

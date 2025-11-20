@@ -1,1 +1,1 @@
-import "./elections";
+import "./create_election";
