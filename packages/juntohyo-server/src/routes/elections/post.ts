@@ -47,7 +47,6 @@ app.post("/elections",
 
         const id = crypto.getRandomValues(Buffer.alloc(16)).toString("base64url");
         if (await c.env.ELECTIONS_KV.get(id)) {
-            console.log(`**お知らせ** IDが衝突しました!!!! ${id}`);
             throw new ClientError(ErrorCodes.ConflictID);
         }
 
