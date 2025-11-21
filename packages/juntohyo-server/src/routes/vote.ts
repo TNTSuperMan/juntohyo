@@ -24,13 +24,13 @@ app.post("/elections/:id/votes",
 
         const raw_election = await c.env.ELECTIONS_KV.get(c.req.param("id"));
         if(!raw_election) {
-            throw new ClientError(ErrorCodes.BadRequest);
+            throw new ClientError(ErrorCodes.IncorrectRequest);
         }
         const election_id = new Uint8Array(Buffer.from(c.req.param("id"), "base64url"));
         const election = JSON.parse(raw_election) as Election;
 
         if(election.options.length <= body.choice) {
-            throw new ClientError(ErrorCodes.BadRequest);
+            throw new ClientError(ErrorCodes.IncorrectRequest);
         }
 
         const ip_address = getConnInfo(c).remote.address ?? "unknown";
