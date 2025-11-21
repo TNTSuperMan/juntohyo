@@ -1,6 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
 import type { Env } from "../types";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs-webcrypto";
 
 export class AuthDurableObject extends DurableObject<Env> {
     constructor(ctx: DurableObjectState, env: Env) {
