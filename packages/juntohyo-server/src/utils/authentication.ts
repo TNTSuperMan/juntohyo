@@ -1,6 +1,7 @@
 import type { Context } from "hono"
 import { Jwt } from "hono/utils/jwt"
 import type { Env } from "../types"
+import { ClientError, ErrorCodes } from "./client_error";
 
 const JWT_ALGORITHM: "HS256" = "HS256";
 
@@ -10,7 +11,7 @@ export const generateToken = (c: Context<Env>, election: string) => (
     }, c.env.JWT_KEY, JWT_ALGORITHM)
 );
 
-export const verifyToken = async (c: Context<Env>, token: string, election: string): Promise<boolean> => {
+export const verifyToken = async (c: Context<Env>, token: string, election: string): Promise<void> => {
     const payload = await Jwt.verify(
         token,
         c.env.JWT_KEY,
@@ -18,8 +19,8 @@ export const verifyToken = async (c: Context<Env>, token: string, election: stri
     ).catch(() => null);
 
     if(!payload) {
-        return false;
-    } else {
-        return payload.election === election;
+        throw new ClientError(ErrorCodes.IncorrectRequest);
+    } else if(payload.election !== election) {
+        throw new ClientError(ErrorCodes.IncorrectRequest);
     }
 }
