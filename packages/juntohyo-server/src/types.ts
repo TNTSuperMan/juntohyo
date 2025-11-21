@@ -10,6 +10,7 @@ export interface Bindings {
     
     TURNSTILE_SECRET: string;
     HASH_KEY: string;
+    JWT_KEY: string;
 }
 
 export interface Env extends HonoEnv {

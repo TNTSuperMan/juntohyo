@@ -6,6 +6,7 @@ import { verifyTurnstile } from "../utils/turnstile";
 import { ClientError, ErrorCodes } from "../utils/client_error";
 import type { Election } from "../types";
 import { hash } from "../utils/password";
+import { generateToken } from "../utils/authentication";
 
 interface Option {
     /**
@@ -58,7 +59,9 @@ app.post("/elections",
         }
 
         await c.env.ELECTIONS_KV.put(id, JSON.stringify(election));
+
+        const token = await generateToken(c, id);
         
-        return c.json({ success: true, id: id }, 201);
+        return c.json({ success: true, id, token }, 201);
     }
 );

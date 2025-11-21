@@ -2,6 +2,7 @@ import type { ClientErrorStatusCode } from "hono/utils/http-status";
 
 export const enum ErrorCodes {
     BadRequest = "BAD_REQUEST",
+    IncorrectRequest = "INCORRECT_REQUEST",
     ServerError = "SERVER_ERROR",
     InvalidTurnstile = "INVALID_TURNSTILE",
     ConflictID = "CONFLICT_ID",
@@ -11,6 +12,7 @@ export const enum ErrorCodes {
 const ErrorCodeToStatus = (code: ErrorCodes): ClientErrorStatusCode | 500 => {
     switch (code) {
         case ErrorCodes.BadRequest: return 400;
+        case ErrorCodes.IncorrectRequest: return 404;
         case ErrorCodes.ServerError:return 500;
         case ErrorCodes.InvalidTurnstile: return 400;
         case ErrorCodes.ConflictID: return 500;
