@@ -1,6 +1,6 @@
 import { bench, run } from "mitata";
 
-import bcrypt from "../../juntohyo-server/node_modules/bcryptjs";
+import bcrypt from "../../../node_modules/bcryptjs-webcrypto";
 
 const key_str = "SECRET_HASH_KEY_X5gP05wW398ekqlWvp";
 const ip_str = "114.514.1919.810";
