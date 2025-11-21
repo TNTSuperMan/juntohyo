@@ -11,5 +11,8 @@
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@types/react-router-dom": "^5.3.3"
+  },
+  "scripts": {
+    "build": "bun build index.html --outdir=dist --production"
   }
 }
