@@ -45,9 +45,9 @@ export function CreateElection() {
         }
     }
 
-    return <main className="create-election" onSubmit={send}>
+    return <main className="create-election">
         <h2>投票箱を作る</h2>
-        <form>
+        <form onSubmit={send}>
             <label>
                 タイトル: <br />
                 <input required type="text" name="title" maxLength={128} value={title} onChange={e=>setTitle(e.target.value)} />
