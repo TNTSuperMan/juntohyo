@@ -4,16 +4,34 @@ compatibility_date = "2025-10-14"
 preview_urls = false
 
 [build]
-command = "bun run build"
+command = "bun build.ts"
 
 [dev]
 port = 8787
 
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["AuthDurableObject"]
+
+[[durable_objects.bindings]]
+name = "AUTH_DO"
+class_name = "AuthDurableObject"
+
 [[d1_databases]]
 binding = "VOTES_DB"
-database_name = "juntohyo-db"
-database_id = "id"
+database_name = "DB"
+database_id = "77777777-7777-7777-7777-777777777777"
 
 [[kv_namespaces]]
 binding = "ELECTIONS_KV"
-id = "id"
+id = "77777777777777777777777777777777"
+
+[[ratelimits]]
+name = "GET_RATE_LIMITER"
+namespace_id = "1"
+simple = { limit = 100, period = 60 }
+
+[[ratelimits]]
+name = "POSTY_RATE_LIMITER"
+namespace_id = "2"
+simple = { limit = 100, period = 60 }
