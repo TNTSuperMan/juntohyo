@@ -1,5 +1,6 @@
 import { useState, type FormEventHandler } from "react"
 import { Turnstile } from "../components/Turnstile";
+import { fetch_e } from "../utils/fetch";
 
 let unique_counter = 0;
 
@@ -29,22 +30,14 @@ export function CreateElection() {
             "cf-turnstile-response": token
         };
 
-        const create_result = await fetch(new URL("/elections", process.env.SERVER_ORIGIN), {
+        const res = await fetch_e(new URL("/elections", process.env.SERVER_ORIGIN), {
             method: "post",
             body: JSON.stringify(payload),
-        }).catch(() => null);
-
-        if(!create_result) {
-            setError("通信エラーが発生しました");
-        } else if(create_result.ok) {
-            alert("成功しました");
+        });
+        if (typeof res === "string") {
+            setError(res);
         } else {
-            const error_result = await create_result.json().catch(() => null);
-            if(!error_result) {
-                setError("サーバーエラーが発生しました");
-            } else {
-                setError(`エラー: ${error_result.error}`);
-            }
+            // TODO: 成功時の挙動
         }
     }
 
