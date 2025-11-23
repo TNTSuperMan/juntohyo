@@ -1,13 +1,14 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
 import { App } from "./App";
-
-import "./style/normal.css";
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 
 document.body.classList.add(
     localStorage.getItem("juntohyo-theme") ?? "normal"
 );
 
 createRoot(document.body).render(<StrictMode>
-    <App />
+    <ChakraProvider value={defaultSystem}>
+        <App />
+    </ChakraProvider>
 </StrictMode>);
