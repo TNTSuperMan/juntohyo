@@ -26,7 +26,8 @@ export function CreateElection() {
             password: string | null;
             "cf-turnstile-response": string;
         } = {
-            title, description, options, password,
+            title, description, password,
+            options: options.map(e => ({ name: e.name })),
             "cf-turnstile-response": token
         };
 
