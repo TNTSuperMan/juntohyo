@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type FormEventHandler } from "react"
 import { Turnstile } from "../components/Turnstile";
 
 let unique_counter = 0;
@@ -10,9 +10,13 @@ export function CreateElection() {
     const [newOptionName, setNewOptionName] = useState<string>("");
     const [password, setPassword] = useState<string | null>(null);
     const [token, setToken] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
-    async function send() {
-        if(!token) return;
+    const send: FormEventHandler<HTMLFormElement> = async ev => {
+        ev.preventDefault();
+
+        setError(null);
+        if(!token) return setError("Cloudflare Turnstile認証がされていません");
 
         const payload: {
             title: string;
@@ -30,17 +34,16 @@ export function CreateElection() {
             body: JSON.stringify(payload),
         }).catch(() => null);
 
-         // TODO: UX改善
         if(!create_result) {
-            alert("通信エラーが発生しました");
+            setError("通信エラーが発生しました");
         } else if(create_result.ok) {
             alert("成功しました");
         } else {
             const error_result = await create_result.json().catch(() => null);
             if(!error_result) {
-                alert("内部エラーが発生しました");
+                setError("サーバーエラーが発生しました");
             } else {
-                alert(`エラー: ${error_result.error}`);
+                setError(`エラー: ${error_result.error}`);
             }
         }
     }
@@ -92,6 +95,7 @@ export function CreateElection() {
             </div>
             <br />
             <Turnstile onSuccess={setToken} />
+            { error && <span className="error">{ error }</span> }
             <input type="submit" value="作成" />
         </form>
     </main>
