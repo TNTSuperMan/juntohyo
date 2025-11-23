@@ -11,4 +11,5 @@ await build({
     define: {
         "process.env.NODE_ENV": `"production"`
     },
+    env: "inline",
 });
