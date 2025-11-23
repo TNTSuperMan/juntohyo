@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Turnstile } from "../components/Turnstile";
 
 let unique_counter = 0;
 
@@ -8,8 +9,43 @@ export function CreateElection() {
     const [options, setOptions] = useState<{ name: string, unique: number }[]>([]);
     const [newOptionName, setNewOptionName] = useState<string>("");
     const [password, setPassword] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null>(null);
 
-    return <main className="create-election">
+    async function send() {
+        if(!token) return;
+
+        const payload: {
+            title: string;
+            description: string;
+            options: {name:string}[];
+            password: string | null;
+            "cf-turnstile-response": string;
+        } = {
+            title, description, options, password,
+            "cf-turnstile-response": token
+        };
+
+        const create_result = await fetch(new URL("/elections", process.env.SERVER_ORIGIN), {
+            method: "post",
+            body: JSON.stringify(payload),
+        }).catch(() => null);
+
+         // TODO: UX改善
+        if(!create_result) {
+            alert("通信エラーが発生しました");
+        } else if(create_result.ok) {
+            alert("成功しました");
+        } else {
+            const error_result = await create_result.json().catch(() => null);
+            if(!error_result) {
+                alert("内部エラーが発生しました");
+            } else {
+                alert(`エラー: ${error_result.error}`);
+            }
+        }
+    }
+
+    return <main className="create-election" onSubmit={send}>
         <h2>投票箱を作る</h2>
         <form>
             <label>
@@ -55,6 +91,7 @@ export function CreateElection() {
                 <input type="password" name="password" disabled={password === null} value={password ?? ""} onChange={e => setPassword(e.target.value)} />
             </div>
             <br />
+            <Turnstile onSuccess={setToken} />
             <input type="submit" value="作成" />
         </form>
     </main>
