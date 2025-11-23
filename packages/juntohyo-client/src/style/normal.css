@@ -74,5 +74,27 @@ body.normal {
             max-height: 50vh;
             resize: vertical;
         }
+        ul {
+            input {
+                margin: 3px;
+                width: min(400px, 100%);
+            }
+            button.remove {
+                background: #f00;
+                color: #fff;
+
+                border: none;
+                border-radius: 10px;
+
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+
+                cursor: pointer;
+            }
+            small {
+                display: block;
+            }
+        }
     }
 }
