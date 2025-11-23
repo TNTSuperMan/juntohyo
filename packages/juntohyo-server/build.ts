@@ -6,10 +6,11 @@ await build({
     plugins: [UnpluginTypia()],
     outdir: "./dist",
     target: "browser",
-    minify: true,
+    minify: process.env.NODE_ENV === "production",
     external: ["cloudflare:workers"],
     define: {
-        "process.env.NODE_ENV": `"production"`
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV ?? "development"),
     },
     env: "inline",
+    sourcemap: process.env.NODE_ENV === "production" ? "none" : "linked",
 });

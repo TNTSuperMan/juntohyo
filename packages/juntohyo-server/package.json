@@ -16,7 +16,7 @@
     "wrangler": "^4.42.2"
   },
   "scripts": {
-    "build": "bun build.ts",
+    "build": "NODE_ENV=production bun build.ts",
     "prepare": "wrangler types && ts-patch install",
     "dev": "wrangler dev"
   }
