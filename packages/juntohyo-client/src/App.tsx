@@ -4,14 +4,13 @@ export function App() {
     return <>
         <header>
             <h1>純投票</h1>
+            <a href="/">ホーム</a>
+            <a href="/legal-info">利用規約・プライバシーポリシー等</a>
+            <a target="_blank" href="https://github.com/TNTSuperMan/juntohyo">ソースコード</a>
         </header>
         <Router />
         <footer>
-            &copy; TNTSuperMan 2025
-            <nav>
-                <a href="/legal-info">利用規約・プライバシーポリシー等</a>
-                <a target="_blank" href="https://github.com/TNTSuperMan/juntohyo">ソースコード</a>
-            </nav>
+            &copy; 2025 TNTSuperMan
         </footer>
     </>
 }

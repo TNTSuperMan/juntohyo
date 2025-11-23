@@ -4,10 +4,10 @@ export function CreateElection() {
     const [title, setTitle] = useState<string>("");
     const [description, setDescription] = useState<string>("");
 
-    return <main>
+    return <main className="create-election">
         <h2>投票箱を作る</h2>
         <label>
-            タイトル:
+            タイトル: <br />
             <input type="text" name="title" maxLength={128} value={title} onChange={e=>setTitle(e.target.value)} />
         </label>
         <br />

@@ -1,42 +1,78 @@
 body.normal {
-    ul.inline {
-        li {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    header {
+        background: linear-gradient(0deg, #F0F0F0 0%, #FFFFFF 100%);
+        width: calc(100% - 20px);
+        flex: 0 0 auto;
+        padding: 10px;
+        text-align: center;
+
+        h1 {
+            margin: 5px;
+        }
+
+        a {
             display: inline-block;
             margin: 5px;
-            &::before {
-                content: "・";
-            }
+            color: #00f;
         }
     }
 
-    .create-button {
-        background: rgb(150, 244, 255);
-        color: #111111;
-
-        display: block;
-        text-decoration: none;
-        text-align: center;
-        font-size: 30px;
-
-        width: min(100%, 500px);
-        margin: 10px;
-        padding: 15px;
-        border-radius: 20px;
-
-        transition: all 0.3s ease;
-
-        &:hover {
-            background: rgb(73, 237, 255);
-            color: #000;
-        }
+    main {
+        margin: 20px;
     }
 
     footer {
-        nav {
-            a {
-                color: #00f;
-                margin: 5px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+
+        background: linear-gradient(0deg, #FFFFFF 0%, rgba(210, 210, 210, 0.5) 100%);
+        font-size: 12px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .index {
+        .create-button {
+            background: rgb(150, 244, 255);
+            color: #111111;
+
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            font-size: 30px;
+
+            width: min(70%, 500px);
+            margin: 10px;
+            padding: 15px;
+            border-radius: 20px;
+
+            transition: all 0.3s ease;
+
+            &:hover {
+                background: rgb(73, 237, 255);
+                color: #000;
             }
+        }
+    }
+
+    .create-election {
+        input {
+            border: 1px #AAA solid;
+            border-radius: 20px;
+            padding: 5px;
+            font-size: 15px;
+            width: min(500px, 100%);
+        }
+        textarea {
+            font-size: 15px;
+            width: min(500px, 100%);
+            max-height: 50vh;
+            resize: vertical;
         }
     }
 }

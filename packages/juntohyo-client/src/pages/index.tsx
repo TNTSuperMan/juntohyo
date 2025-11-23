@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export function Index() {
-    return <main>
+    return <main className="index">
         <p>
             オープンソース、無料、登録不要、シンプル。<br />
             簡単に使える投票アプリ。
