@@ -1,7 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Index } from "./pages";
+import { App } from "./App";
 
 import "./style/normal.css";
 
@@ -10,9 +9,5 @@ document.body.classList.add(
 );
 
 createRoot(document.body).render(<StrictMode>
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Index />} />
-        </Routes>
-    </BrowserRouter>
+    <App />
 </StrictMode>);
