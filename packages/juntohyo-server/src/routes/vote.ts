@@ -7,6 +7,7 @@ import { ClientError, ErrorCodes } from "../utils/client_error";
 import type { Election } from "../types";
 import { getConnInfo } from "hono/cloudflare-workers";
 import { calcHashes } from "../utils/hash";
+import { hexToBinary } from "../utils/id_convert";
 
 interface VoteBody {
     choice: number;
@@ -26,7 +27,7 @@ app.post("/elections/:id/votes",
         if(!raw_election) {
             throw new ClientError(ErrorCodes.IncorrectRequest);
         }
-        const election_id = new Uint8Array(Buffer.from(c.req.param("id"), "base64url"));
+        const election_id = hexToBinary(c.req.param("id"));
         const election = JSON.parse(raw_election) as Election;
 
         if(election.options.length <= body.choice) {

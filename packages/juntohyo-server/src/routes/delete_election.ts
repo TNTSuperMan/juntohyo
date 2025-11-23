@@ -1,5 +1,6 @@
 import { app } from "../app";
 import { verifyToken } from "../utils/authentication";
+import { hexToBinary } from "../utils/id_convert";
 
 app.delete("/elections/:id", async (c) => {
     const id = c.req.param("id")
@@ -7,7 +8,7 @@ app.delete("/elections/:id", async (c) => {
 
     await c.env.ELECTIONS_KV.delete(id);
     
-    const blob_id = new Uint8Array(Buffer.from(id, "base64url"));
+    const blob_id = hexToBinary(id);
 
     await c.env.VOTES_DB.prepare("DELETE FROM votes WHERE election = ?;").bind(blob_id).run();
 

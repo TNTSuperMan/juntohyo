@@ -7,6 +7,7 @@ import { ClientError, ErrorCodes } from "../utils/client_error";
 import type { Election } from "../types";
 import { hash } from "../utils/password";
 import { generateToken } from "../utils/authentication";
+import { binaryToHex } from "../utils/id_convert";
 
 interface Option {
     /**
@@ -46,7 +47,7 @@ app.post("/elections",
         
         await verifyTurnstile(c, body["cf-turnstile-response"]);
 
-        const id = crypto.getRandomValues(Buffer.alloc(16)).toString("base64url");
+        const id = binaryToHex(crypto.getRandomValues(new Uint8Array(16)));
         if (await c.env.ELECTIONS_KV.get(id)) {
             throw new ClientError(ErrorCodes.ConflictID);
         }
