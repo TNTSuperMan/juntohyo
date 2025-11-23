@@ -9,7 +9,7 @@ export const app = new Hono<Env>();
 app.use(rateLimit());
 app.use(cors({
     origin: process.env.ORIGIN!,
-    allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Authorization"],
+    allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Authorization", "Content-Type"],
     allowMethods: ["POST", "GET", "DELETE", "OPTIONS"],
     exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
     maxAge: 3600,
