@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "bun build.ts",
-    "prepare": "wrangler types && ts-patch install"
+    "prepare": "wrangler types && ts-patch install",
+    "dev": "wrangler dev"
   }
 }
