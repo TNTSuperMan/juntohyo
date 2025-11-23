@@ -34,6 +34,7 @@ export function CreateElection() {
         const res = await fetch_e(new URL("/elections", process.env.SERVER_ORIGIN), {
             method: "post",
             body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" },
         });
         if (typeof res === "string") {
             setError(res);
