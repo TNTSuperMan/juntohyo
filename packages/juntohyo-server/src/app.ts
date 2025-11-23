@@ -22,6 +22,7 @@ app.onError((err, c) => {
             error: err.message,
         }, err.status);
     } else {
+        console.error(err);
         return c.json({
             error: ErrorCodes.ServerError,
         }, 500);
