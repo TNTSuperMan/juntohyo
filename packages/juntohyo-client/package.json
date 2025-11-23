@@ -13,6 +13,7 @@
     "@types/react-router-dom": "^5.3.3"
   },
   "scripts": {
-    "build": "bun build index.html --outdir=dist --production"
+    "build": "bun build index.html --outdir=dist --production",
+    "dev": "bun ./scripts/serve.js"
   }
 }
