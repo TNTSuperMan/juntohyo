@@ -46,12 +46,14 @@ export function CreateElection() {
             />
             { options.length >= 16 && <small>選択肢は16個までです</small> }
         </ul>
-        <label>
+        <div>
             パスワード
             <input type="checkbox" name="password_enable" checked={password !== null} onChange={e => e.target.checked ? setPassword("") : setPassword(null)} />
             :
             <br />
             <input type="password" name="password" disabled={password === null} value={password ?? ""} onChange={e => setPassword(e.target.value)} />
-        </label>
+        </div>
+        <br />
+        <input type="submit" value="作成" />
     </main>
 }

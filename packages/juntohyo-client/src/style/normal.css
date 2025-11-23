@@ -79,21 +79,41 @@ body.normal {
                 margin: 3px;
                 width: min(400px, 100%);
             }
-            button.remove {
-                background: #f00;
-                color: #fff;
-
+            button {
                 border: none;
-                border-radius: 10px;
+                border-radius: 12.5px;
 
                 display: inline-block;
-                width: 20px;
-                height: 20px;
+                width: 25px;
+                height: 25px;
 
                 cursor: pointer;
             }
+            button.remove {
+                background: #f00;
+                color: #fff;
+            }
+            button.add {
+                border: 1px black solid;
+            }
             small {
                 display: block;
+            }
+        }
+        input[type=submit] {
+            border: 1px #AAA solid;
+            border-radius: 10px;
+
+            margin: 10px 0;
+            padding: 5px 10px;
+            font-size: 15px;
+
+            background: #FFFFFF;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            
+            &:hover {
+                border: 1px #777 solid;
             }
         }
     }
