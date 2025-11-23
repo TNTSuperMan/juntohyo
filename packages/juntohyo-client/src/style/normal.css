@@ -61,7 +61,7 @@ body.normal {
     }
 
     .create-election {
-        input {
+        input[type=text] {
             border: 1px #AAA solid;
             border-radius: 20px;
             padding: 5px;

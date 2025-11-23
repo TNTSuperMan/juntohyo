@@ -7,6 +7,7 @@ export function CreateElection() {
     const [description, setDescription] = useState<string>("");
     const [options, setOptions] = useState<{ name: string, unique: number }[]>([]);
     const [newOptionName, setNewOptionName] = useState<string>("");
+    const [password, setPassword] = useState<string | null>(null);
 
     return <main className="create-election">
         <h2>投票箱を作る</h2>
@@ -45,5 +46,12 @@ export function CreateElection() {
             />
             { options.length >= 16 && <small>選択肢は16個までです</small> }
         </ul>
+        <label>
+            パスワード
+            <input type="checkbox" name="password_enable" checked={password !== null} onChange={e => e.target.checked ? setPassword("") : setPassword(null)} />
+            :
+            <br />
+            <input type="password" name="password" disabled={password === null} value={password ?? ""} onChange={e => setPassword(e.target.value)} />
+        </label>
     </main>
 }
