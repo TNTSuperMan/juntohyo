@@ -1,22 +1,22 @@
 import { typiaValidator } from "@hono/typia-validator";
-import { app } from "../app";
 import typia from "typia";
 import { handleValidation } from "../utils/handle_validation";
 import { verifyTurnstile } from "../utils/turnstile";
 import { ClientError, ErrorCodes } from "../utils/client_error";
-import type { Election } from "../types";
+import { type Env, type Election } from "../types";
 import { getConnInfo } from "hono/cloudflare-workers";
 import { calcHashes } from "../utils/hash";
 import { hexToBinary } from "../utils/id_convert";
+import { Hono } from "hono";
 
-interface VoteBody {
+export interface VoteBody {
     choice: number;
     "cf-turnstile-response": string;
 }
 
 const voteBodyValidator = typia.createValidate<VoteBody>();
 
-app.post("/elections/:id/votes",
+export const voteRoute = new Hono<Env>().post("/elections/:id/votes",
     typiaValidator("json", voteBodyValidator, handleValidation),
     async (c) => {
         const body = c.req.valid("json");

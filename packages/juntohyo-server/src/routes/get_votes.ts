@@ -1,8 +1,9 @@
-import { app } from "../app";
+import { Hono } from "hono";
 import { verifyToken } from "../utils/authentication";
 import { hexToBinary } from "../utils/id_convert";
+import type { Env } from "../types";
 
-app.get("/elections/:id/votes", async (c) => {
+export const getVotesRoute = new Hono<Env>().get("/elections/:id/votes", async (c) => {
     const id = c.req.param("id");
     await verifyToken(c, c.req.header("Authorization") ?? "", id);
 

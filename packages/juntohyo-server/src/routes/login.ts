@@ -1,14 +1,14 @@
 import typia from "typia";
-import { app } from "../app";
 import { typiaValidator } from "@hono/typia-validator";
 import { handleValidation } from "../utils/handle_validation";
 import { verifyTurnstile } from "../utils/turnstile";
 import { ClientError, ErrorCodes } from "../utils/client_error";
-import type { Election } from "../types";
+import type { Election, Env } from "../types";
 import { compare } from "../utils/password";
 import { generateToken } from "../utils/authentication";
+import { Hono } from "hono";
 
-interface LoginBody {
+export interface LoginBody {
     /**
      * @maxLength 22
      */
@@ -24,7 +24,7 @@ interface LoginBody {
 
 const loginBodyValidator = typia.createValidate<LoginBody>();
 
-app.post("/login",
+export const loginRoute = new Hono<Env>().post("/login",
     typiaValidator("json", loginBodyValidator, handleValidation),
     async (c) => {
         const body = c.req.valid("json");

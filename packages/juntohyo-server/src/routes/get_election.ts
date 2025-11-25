@@ -1,8 +1,8 @@
-import { app } from "../app";
-import type { Election } from "../types";
+import { Hono } from "hono";
+import type { Election, Env } from "../types";
 import { ClientError, ErrorCodes } from "../utils/client_error";
 
-app.get("/elections/:id", async (c) => {
+export const getElectionRoute = new Hono<Env>().get("/elections/:id", async (c) => {
     const raw_election = await c.env.ELECTIONS_KV.get(c.req.param("id"));
     if(!raw_election) {
         throw new ClientError(ErrorCodes.IncorrectRequest);

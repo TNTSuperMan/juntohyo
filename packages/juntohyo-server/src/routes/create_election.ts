@@ -1,13 +1,13 @@
 import typia from "typia";
-import { app } from "../app";
 import { typiaValidator } from "@hono/typia-validator";
 import { handleValidation } from "../utils/handle_validation";
 import { verifyTurnstile } from "../utils/turnstile";
 import { ClientError, ErrorCodes } from "../utils/client_error";
-import type { Election } from "../types";
+import type { Election, Env } from "../types";
 import { hash } from "../utils/password";
 import { generateToken } from "../utils/authentication";
 import { binaryToHex } from "../utils/id_convert";
+import { Hono } from "hono";
 
 interface Option {
     /**
@@ -16,7 +16,7 @@ interface Option {
     name: string;
 }
 
-interface PostElectionsBody {
+export interface PostElectionsBody {
     /**
      * @maxLength 128
      */
@@ -40,7 +40,7 @@ interface PostElectionsBody {
 
 const postElectionsBodyValidator = typia.createValidate<PostElectionsBody>();
 
-app.post("/elections",
+export const createElectionRoute = new Hono<Env>().post("/elections",
     typiaValidator("json", postElectionsBodyValidator, handleValidation),
     async (c) => {
         const body = c.req.valid("json");

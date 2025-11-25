@@ -1,8 +1,9 @@
-import { app } from "../app";
+import { Hono } from "hono";
 import { verifyToken } from "../utils/authentication";
 import { hexToBinary } from "../utils/id_convert";
+import type { Env } from "../types";
 
-app.delete("/elections/:id", async (c) => {
+export const deleteElectionRoute = new Hono<Env>().delete("/elections/:id", async (c) => {
     const id = c.req.param("id")
     await verifyToken(c, c.req.header("Authorization") ?? "", id);
 
