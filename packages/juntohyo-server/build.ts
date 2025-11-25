@@ -3,7 +3,7 @@ import { build } from "bun";
 
 await build({
     entrypoints: ["./src/index.ts"],
-    plugins: [UnpluginTypia()],
+    plugins: [UnpluginTypia({ cache: process.env.NODE_ENV !== "production" })],
     outdir: "./dist",
     target: "browser",
     minify: process.env.NODE_ENV === "production",
