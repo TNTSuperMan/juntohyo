@@ -1,8 +1,13 @@
+import type { DurableObjectNamespace, D1Database, KVNamespace, RateLimit, Rpc } from "../node_modules/@cloudflare/workers-types/index.ts";
 import type { Env as HonoEnv } from "hono";
-import type { AuthDurableObject } from "./durable-objects/auth";
+
+export interface AuthDurableObjectInterface extends Rpc.DurableObjectBranded {
+    hash(pass: string): Promise<string>;
+    compare(pass: string, hash: string): Promise<boolean>;
+}
 
 export interface Bindings {
-    AUTH_DO: DurableObjectNamespace<AuthDurableObject>;
+    AUTH_DO: DurableObjectNamespace<AuthDurableObjectInterface>;
     VOTES_DB: D1Database;
     ELECTIONS_KV: KVNamespace;
     GET_RATE_LIMITER: RateLimit;

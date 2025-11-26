@@ -1,9 +1,8 @@
-import { app } from "./app";
-import type { Bindings } from "./types";
+import { app } from "../../juntohyo-abstract-server/src";
 
-export { AuthDurableObject } from "./durable-objects/auth";
+export { AuthDurableObject } from "./durable_object";
 
-const handler: ExportedHandler<Bindings> = {
+const handler: ExportedHandler<Env> = {
     fetch: app.fetch,
 };
 

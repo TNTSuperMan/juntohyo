@@ -14,7 +14,8 @@ import { voteRoute } from "./routes/vote";
 export const app = new Hono<Env>()
     .use(rateLimit())
     .use(cors({
-        origin: process.env.ORIGIN!,
+        origin: //@ts-ignore
+            process.env.ORIGIN!,
         allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Authorization", "Content-Type"],
         allowMethods: ["POST", "GET", "DELETE", "OPTIONS"],
         exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
