@@ -1,21 +1,8 @@
 {
   "extends": "../../tsconfig-base.json",
   "compilerOptions": {
-    "types": [
-      "./worker-configuration.d.ts"
-    ],
-    "lib": [
-      "ESNext",
-      "WebWorker"
-    ],
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "strict": true
+    "types": ["./worker-configuration.d.ts"],
+    "lib": ["ESNext", "WebWorker"],
   },
-  "include": ["../juntohyo-abstract-server"]
+  "include": ["../juntohyo-abstract-server"],
 }

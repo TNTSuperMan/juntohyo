@@ -2,17 +2,6 @@
   "extends": "../../tsconfig-base.json",
   "compilerOptions": {
     "types": [],
-    "lib": [
-      "ESNext",
-      "WebWorker"
-    ],
-    "plugins": [
-      {
-        "transform": "typia/lib/transform"
-      }
-    ],
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "strict": true
-  }
+    "lib": ["ESNext", "WebWorker"],
+  },
 }
