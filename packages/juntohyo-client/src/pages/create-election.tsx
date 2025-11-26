@@ -1,6 +1,6 @@
 import { useState, type FormEventHandler } from "react"
 import { Turnstile } from "../components/Turnstile";
-import { fetch_e } from "../utils/fetch";
+import { server } from "../server";
 
 let unique_counter = 0;
 
@@ -19,28 +19,15 @@ export function CreateElection() {
         setError(null);
         if(!token) return setError("Cloudflare Turnstile認証がされていません");
 
-        const payload: {
-            title: string;
-            description: string;
-            options: {name:string}[];
-            password: string | null;
-            "cf-turnstile-response": string;
-        } = {
-            title, description, password,
-            options: options.map(e => ({ name: e.name })),
-            "cf-turnstile-response": token
-        };
-
-        const res = await fetch_e(new URL("/elections", process.env.SERVER_ORIGIN), {
-            method: "post",
-            body: JSON.stringify(payload),
-            headers: { "Content-Type": "application/json" },
+        const res = await server.elections.$post({
+            json: {
+                title, description, password,
+                options: options.map(e => ({ name: e.name })),
+                "cf-turnstile-response": token
+            }
         });
-        if (typeof res === "string") {
-            setError(res);
-        } else {
-            // TODO: 成功時の挙動
-        }
+        
+        // TODO
     }
 
     return <main className="create-election">
