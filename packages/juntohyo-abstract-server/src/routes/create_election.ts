@@ -1,11 +1,11 @@
 import typia from "typia";
 import { typiaValidator } from "@hono/typia-validator";
 import { handleValidation } from "../utils/handle_validation";
-import { verifyTurnstile } from "../utils/turnstile";
-import { ClientError, ErrorCodes } from "../utils/client_error";
+import { verifyTurnstile } from "../middlewares/turnstile";
+import { error, ErrorCodes } from "../utils/error";
 import type { Election, Env } from "../types";
 import { hash } from "../utils/password";
-import { generateToken } from "../utils/authentication";
+import { generateToken } from "../utils/token";
 import { binaryToHex } from "../utils/id_convert";
 import { Hono } from "hono";
 
@@ -34,22 +34,19 @@ export interface PostElectionsBody {
      * @maxLength 128
      */
     password: string | null;
-
-    "cf-turnstile-response": string;
 }
 
 const postElectionsBodyValidator = typia.createValidate<PostElectionsBody>();
 
 export const createElectionRoute = new Hono<Env>().post("/elections",
+    verifyTurnstile,
     typiaValidator("json", postElectionsBodyValidator, handleValidation),
     async (c) => {
         const body = c.req.valid("json");
-        
-        await verifyTurnstile(c, body["cf-turnstile-response"]);
 
         const id = binaryToHex(crypto.getRandomValues(new Uint8Array(16)));
         if (await c.env.ELECTIONS_KV.get(id)) {
-            throw new ClientError(ErrorCodes.ConflictID);
+            return error(c, ErrorCodes.ConflictID);
         }
 
         const election: Election = {

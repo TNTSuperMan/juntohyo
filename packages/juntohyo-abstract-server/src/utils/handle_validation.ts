@@ -1,11 +1,11 @@
 import type { Hook } from "@hono/typia-validator";
 import type { Env } from "../types";
-import { ClientError, ErrorCodes } from "./client_error";
+import { error, ErrorCodes } from "./error";
 
 export const handleValidation: Hook<
     unknown, Env, string
-> = (res, _c) => {
+> = (res, c) => {
     if (!res.success) {
-        throw new ClientError(ErrorCodes.BadRequest);
+        return error(c, ErrorCodes.BadRequest);
     }
 }

@@ -22,6 +22,10 @@ export interface Env extends HonoEnv {
     Bindings: Bindings;
 }
 
+export interface AnyEnv extends Env {
+    Variables?: any;
+}
+
 export interface Option {
     name: string;
 }

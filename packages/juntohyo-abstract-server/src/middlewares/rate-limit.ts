@@ -1,7 +1,7 @@
 import type { MiddlewareHandler } from "hono";
 import { getConnInfo } from "hono/cloudflare-workers";
 import type { Env } from "../types";
-import { ClientError, ErrorCodes } from "../utils/client_error";
+import { error, ErrorCodes } from "../utils/error";
 
 export const rateLimit = (): MiddlewareHandler<Env> => (
     async (c, next) => {
@@ -17,6 +17,6 @@ export const rateLimit = (): MiddlewareHandler<Env> => (
                 return await next();
             }
         }
-        throw new ClientError(ErrorCodes.TooManyRequest);
+        return error(c, ErrorCodes.TooManyRequest);
     }
 );

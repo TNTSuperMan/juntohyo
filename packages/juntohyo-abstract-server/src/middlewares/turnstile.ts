@@ -1,7 +1,7 @@
-import type { Context } from "hono";
+import type { MiddlewareHandler, TypedResponse } from "hono";
 import type { Env } from "../types";
 import { getConnInfo } from "hono/cloudflare-workers";
-import { ClientError, ErrorCodes } from "./client_error";
+import { error, ErrorCodes, type ErrorStatus } from "../utils/error";
 
 interface TurnstileSuccessResponse {
     success: true;
@@ -28,9 +28,21 @@ interface TurnstileFailedResponse {
     )[]
 }
 
-export const verifyTurnstile = async (c: Context<Env>, token: string | null | undefined): Promise<TurnstileSuccessResponse> => {
+type ResponseKind = ErrorCodes.BadRequest | ErrorCodes.InvalidTurnstile | ErrorCodes.ServerError;
+
+export const verifyTurnstile: MiddlewareHandler<Env, string, {
+    in: {
+        header: {
+            "Turnstile-Token": string
+        }
+    }
+}, TypedResponse<
+    { error: ResponseKind },
+    ErrorStatus<ResponseKind>
+>> = async (c, next) => {
+    const token = c.req.header("TurnstileToken");
     if (!token) {
-        throw new ClientError(ErrorCodes.BadRequest);
+        return error(c, ErrorCodes.BadRequest);
     }
 
     const fd = new FormData();
@@ -55,12 +67,12 @@ export const verifyTurnstile = async (c: Context<Env>, token: string | null | un
             result["error-codes"].includes("timeout-or-duplicate") ||
             result["error-codes"].includes("invalid-input-response")
         ) {
-            throw new ClientError(ErrorCodes.InvalidTurnstile);
+            return error(c, ErrorCodes.InvalidTurnstile);
         } else {
             console.error(`Turnstile error: ${result["error-codes"].join(", ")}`);
-            throw new ClientError(ErrorCodes.ServerError);
+            return error(c, ErrorCodes.ServerError);
         }
     }
 
-    return result;
+    await next();
 }

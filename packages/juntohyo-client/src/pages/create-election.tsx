@@ -23,8 +23,10 @@ export function CreateElection() {
             json: {
                 title, description, password,
                 options: options.map(e => ({ name: e.name })),
-                "cf-turnstile-response": token
-            }
+            },
+            header: {
+                "Turnstile-Token": token,
+            },
         });
         
         // TODO
