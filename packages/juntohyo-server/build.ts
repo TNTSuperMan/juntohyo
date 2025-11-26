@@ -1,16 +1,16 @@
 import UnpluginTypia from "@ryoppippi/unplugin-typia/bun";
-import { build } from "bun";
+import { build, env } from "bun";
 
 await build({
     entrypoints: ["./src/index.ts"],
-    plugins: [UnpluginTypia({ cache: process.env.NODE_ENV !== "production" })],
+    plugins: [UnpluginTypia({ cache: env.NODE_ENV !== "production" })],
     outdir: "./dist",
     target: "browser",
-    minify: process.env.NODE_ENV === "production",
+    minify: env.NODE_ENV === "production",
     external: ["cloudflare:workers"],
     define: {
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV ?? "development"),
+        "process.env.NODE_ENV": JSON.stringify(env.NODE_ENV ?? "development"),
     },
     env: "inline",
-    sourcemap: process.env.NODE_ENV === "production" ? "none" : "linked",
+    sourcemap: env.NODE_ENV === "production" ? "none" : "linked",
 });

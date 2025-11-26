@@ -49,6 +49,7 @@
       "name": "juntohyo-server",
       "dependencies": {
         "bcryptjs-webcrypto": "^0.0.1",
+        "juntohyo-abstract-server": "workspace:*",
       },
       "devDependencies": {
         "@cloudflare/workers-types": "^4.20251011.0",

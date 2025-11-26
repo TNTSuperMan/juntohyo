@@ -1,4 +1,4 @@
-import { app } from "../../juntohyo-abstract-server/src";
+import { app } from "juntohyo-abstract-server";
 
 export { AuthDurableObject } from "./durable_object";
 

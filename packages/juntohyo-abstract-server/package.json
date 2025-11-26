@@ -1,6 +1,7 @@
 {
   "name": "juntohyo-abstract-server",
   "module": "src/index.ts",
+  "types": "src/index.ts",
   "peerDependencies": {
     "typescript": "^5"
   },
