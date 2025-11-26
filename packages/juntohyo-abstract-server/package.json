@@ -1,0 +1,16 @@
+{
+  "name": "juntohyo-abstract-server",
+  "module": "src/index.ts",
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "type": "module",
+  "dependencies": {
+    "@hono/typia-validator": "^0.1.2",
+    "hono": "^4.10.6",
+    "typia": "^10.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20251011.0"
+  }
+}
