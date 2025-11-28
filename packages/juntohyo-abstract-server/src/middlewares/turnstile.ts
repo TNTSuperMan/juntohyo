@@ -37,7 +37,7 @@ export const verifyTurnstile: MiddlewareHandler<Env, string, {
         }
     }
 }> = async (c, next) => {
-    const token = c.req.header("TurnstileToken");
+    const token = c.req.header("Turnstile-Token");
     if (!token) {
         return error(c, ErrorCodes.BadRequest);
     }
