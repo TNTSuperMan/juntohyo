@@ -1,6 +1,6 @@
 import { DurableObject } from "cloudflare:workers";
 import { hash, compare } from "bcryptjs-webcrypto";
-import type { AuthDurableObjectInterface } from "../../juntohyo-abstract-server/src/types";
+import type { AuthDurableObjectInterface } from "juntohyo-abstract-server/src/types";
 
 export class AuthDurableObject extends DurableObject<Env> implements AuthDurableObjectInterface {
     constructor(ctx: DurableObjectState, env: Env) {
