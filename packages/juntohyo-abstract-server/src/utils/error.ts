@@ -1,5 +1,8 @@
 import type { Context } from "hono";
-import type { ClientErrorStatusCode } from "hono/utils/http-status";
+
+export interface ErrorResponse {
+    code: ErrorCodes;
+}
 
 export const enum ErrorCodes {
     BadRequest = "BAD_REQUEST",
@@ -32,6 +35,6 @@ const ErrorCodeToStatus = <T extends ErrorCodes>(code: T): ErrorStatus<T> => {
 
 export const error = (c: Context, code: ErrorCodes) => {
     return c.json({
-        error: code,
-    }, ErrorCodeToStatus(code));
+        code,
+    } as ErrorResponse, ErrorCodeToStatus(code));
 }

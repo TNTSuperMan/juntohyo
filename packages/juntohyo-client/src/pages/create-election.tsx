@@ -1,6 +1,8 @@
 import { useState, type FormEventHandler } from "react"
 import { Turnstile } from "../components/Turnstile";
 import { server } from "../server";
+import { ErrorCodes, type ErrorResponse } from "juntohyo-abstract-server/src/utils/error";
+import { ErrorView } from "../components/Error";
 
 let unique_counter = 0;
 
@@ -11,13 +13,13 @@ export function CreateElection() {
     const [newOptionName, setNewOptionName] = useState<string>("");
     const [password, setPassword] = useState<string | null>(null);
     const [token, setToken] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<ErrorResponse | null>(null);
 
     const send: FormEventHandler<HTMLFormElement> = async ev => {
         ev.preventDefault();
 
         setError(null);
-        if(!token) return setError("Cloudflare Turnstile認証がされていません");
+        if(!token) return setError({ code: ErrorCodes.InvalidTurnstile });
 
         const res = await server.elections.$post({
             json: {
@@ -29,7 +31,9 @@ export function CreateElection() {
             },
         });
         
-        // TODO
+        if (!res.ok) {
+            return setError(await res.json().catch(() => ({ code: ErrorCodes.ServerError })));
+        }
     }
 
     return <main className="create-election">
@@ -79,7 +83,7 @@ export function CreateElection() {
             </div>
             <br />
             <Turnstile onSuccess={setToken} />
-            { error && <span className="error">{ error }</span> }
+            <ErrorView error={error} />
             <input type="submit" value="作成" />
         </form>
     </main>
