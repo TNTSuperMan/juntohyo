@@ -30,7 +30,7 @@ const ErrorCodeToStatus = <T extends ErrorCodes>(code: T): ErrorStatus<T> => {
     }
 }
 
-export const error = <T extends ErrorCodes>(c: Context, code: T) => {
+export const error = (c: Context, code: ErrorCodes) => {
     return c.json({
         error: code,
     }, ErrorCodeToStatus(code));

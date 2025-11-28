@@ -36,10 +36,7 @@ export const verifyTurnstile: MiddlewareHandler<Env, string, {
             "Turnstile-Token": string
         }
     }
-}, TypedResponse<
-    { error: ResponseKind },
-    ErrorStatus<ResponseKind>
->> = async (c, next) => {
+}> = async (c, next) => {
     const token = c.req.header("TurnstileToken");
     if (!token) {
         return error(c, ErrorCodes.BadRequest);
