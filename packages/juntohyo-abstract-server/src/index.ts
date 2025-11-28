@@ -16,7 +16,7 @@ export const app = new Hono<Env>()
     .use(cors({
         origin: //@ts-ignore
             process.env.ORIGIN!,
-        allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Authorization", "Content-Type"],
+        allowHeaders: ["X-Custom-Header", "Upgrade-Insecure-Requests", "Authorization", "Content-Type", "Turnstile-Token"],
         allowMethods: ["POST", "GET", "DELETE", "OPTIONS"],
         exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
         maxAge: 3600,
