@@ -13,6 +13,7 @@ export function Vote() {
     const [error, setError] = useState<ErrorResponse>();
 
     useEffect(() => {
+        setElection(undefined);
         server.elections[":id"].$get({
             param: { id },
         }).then(async election_response => {
