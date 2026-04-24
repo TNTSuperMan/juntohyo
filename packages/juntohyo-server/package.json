@@ -10,8 +10,7 @@
     "@cloudflare/workers-types": "^4.20251011.0",
     "@ryoppippi/unplugin-typia": "^2.6.5",
     "ts-patch": "^3.3.0",
-    "typescript": "~5.8.2",
-    "wrangler": "^4.50.0"
+    "typescript": "~5.8.2"
   },
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",
